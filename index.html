@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayzat x HungerStation - HRMS Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 50%, #3498db 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8e44ad 0%, #f1c40f 100%);
+        }
+        
+        .brand-partnership {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .brand-logo {
+            font-size: 2.5em;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .bayzat-brand {
+            color: #8e44ad;
+            text-shadow: 2px 2px 4px rgba(142, 68, 173, 0.2);
+        }
+        
+        .partnership-symbol {
+            font-size: 1.5em;
+            color: #7f8c8d;
+            margin: 0 10px;
+        }
+        
+        .hungerstation-brand {
+            color: #f1c40f;
+            text-shadow: 2px 2px 4px rgba(241, 196, 15, 0.2);
+        }
+        
+        .proposal-title {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .rfp-reference {
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(142, 68, 173, 0.3);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8e44ad, #9b59b6);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(142, 68, 173, 0.2);
+        }
+        
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .category-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(142, 68, 173, 0.3);
+        }
+        
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        
+        .document-links {
+            space-y: 15px;
+        }
+        
+        .document-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #8e44ad;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .document-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+        
+        .document-link:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px rgba(142, 68, 173, 0.2);
+            color: white;
+        }
+        
+        .document-link:hover::before {
+            opacity: 1;
+        }
+        
+        .document-link:hover .document-icon {
+            background: rgba(255, 255, 255, 0.9);
+            color: #8e44ad;
+        }
+        
+        .document-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background: linear-gradient(45deg, #8e44ad, #9b59b6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .document-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .document-name {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .document-desc {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            line-height: 1.4;
+        }
+        
+        .document-link:hover .document-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .deadline-notice {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+            animation: pulse 3s infinite;
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3); }
+            50% { transform: scale(1.02); box-shadow: 0 25px 50px rgba(231, 76, 60, 0.4); }
+            100% { transform: scale(1); box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3); }
+        }
+        
+        .deadline-notice h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .deadline-notice p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .brand-partnership {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .brand-logo {
+                font-size: 2em;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Modern scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Loading animation for better UX */
+        .category-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.2s; }
+        .category-card:nth-child(3) { animation-delay: 0.3s; }
+        .category-card:nth-child(4) { animation-delay: 0.4s; }
+        .category-card:nth-child(5) { animation-delay: 0.5s; }
+        .category-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand-partnership">
+                <div class="brand-logo bayzat-brand">Bayzat</div>
+                <div class="partnership-symbol">×</div>
+                <div class="brand-logo hungerstation-brand">HungerStation</div>
+            </div>
+            <div class="proposal-title">Comprehensive HRMS Solution Proposal</div>
+            <div class="rfp-reference">RFP Reference: HS-RFP-0002 | Submission Due: July 2, 2025</div>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card">
+                <div class="category-number">1</div>
+                <div class="category-title">Company Overview</div>
+                <div class="document-links">
+                    <a href="about-us.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">About Us</div>
+                            <div class="document-desc">Bayzat's mission, vision, and regional leadership in HR technology</div>
+                        </div>
+                    </a>
+                    <a href="company-profile.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">Company Profile</div>
+                            <div class="document-desc">Comprehensive corporate overview, team expertise, and market presence</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-number">2</div>
+                <div class="category-title">Security & Compliance</div>
+                <div class="document-links">
+                    <a href="security-brochure.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">Security Brochure</div>
+                            <div class="document-desc">Comprehensive data protection, privacy measures, and security protocols</div>
+                        </div>
+                    </a>
+                    <a href="soc2-iso-certifications.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">SOC 2 & ISO Certifications</div>
+                            <div class="document-desc">Official compliance certifications and audit reports</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-number">3</div>
+                <div class="category-title">Implementation & Support</div>
+                <div class="document-links">
+                    <a href="implementation-support.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">Implementation & Support</div>
+                            <div class="document-desc">Project methodology, timeline, training programs, and ongoing support services</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <div class="category-number">4</div>
+                <div class="category-title">Investment Structure</div>
+                <div class="document-links">
+                    <a href="license-implementation-fees.pdf" class="document-link">
+                        <div class="document-icon">PDF</div>
+                        <div class="document-content">
+                            <div class="document-name">License & Implementation Fees</div>
+                            <div class="document-desc">Transparent pricing model, licensing structure, and implementation costs</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="deadline-notice">
+            <h3>⏰ Submission Deadline</h3>
+            <p><strong>End of Wednesday, July 2, 2025</strong> • PDF Format Required</p>
+        </div>
+    </div>
+
+    <script>
+        // Add click tracking and smooth interactions
+        document.querySelectorAll('.document-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const docName = this.querySelector('.document-name').textContent;
+                console.log(`Document accessed: ${docName}`);
+                
+                // Add a subtle loading indicator
+                const icon = this.querySelector('.document-icon');
+                const originalText = icon.textContent;
+                icon.textContent = '↗';
+                
+                setTimeout(() => {
+                    icon.textContent = originalText;
+                }, 1000);
+            });
+        });
+
+        // Add intersection observer for smooth animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.category-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add modern loading state
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
